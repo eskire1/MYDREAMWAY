@@ -1,0 +1,138 @@
+{
+  "datasets": [
+    {
+      "id": "ETH-USDT_001",
+      "symbol": "ETH-USDT",
+      "seq": 1,
+      "path": "data/eth_2022.csv",
+      "start": "",
+      "end": "",
+      "bars": 36000,
+      "created_at": "2026-06-01T06:52:02+00:00"
+    },
+    {
+      "id": "ETH-USDT_002",
+      "symbol": "ETH-USDT",
+      "seq": 2,
+      "path": "data/eth_historical.csv",
+      "start": "",
+      "end": "",
+      "bars": 17304,
+      "created_at": "2026-06-01T06:52:02+00:00"
+    },
+    {
+      "id": "ETH-USDT_003",
+      "symbol": "ETH-USDT",
+      "seq": 3,
+      "path": "data/eth_historical_2.csv",
+      "start": "",
+      "end": "",
+      "bars": 17315,
+      "created_at": "2026-06-01T06:52:02+00:00"
+    },
+    {
+      "id": "BTC-USDT_001",
+      "symbol": "BTC-USDT",
+      "seq": 1,
+      "path": "data/historical.csv",
+      "start": "",
+      "end": "",
+      "bars": 17298,
+      "created_at": "2026-06-01T06:52:02+00:00"
+    },
+    {
+      "id": "ETH-USDT_004",
+      "symbol": "ETH-USDT",
+      "seq": 4,
+      "path": "data/historical/ETH-USDT/ETH-USDT_004_20260101_20260601.csv",
+      "start": "2026-01-01",
+      "end": "2026-06-01",
+      "bars": 14525,
+      "created_at": "2026-06-01T07:05:29+00:00"
+    },
+    {
+      "id": "ETH-USDT_005",
+      "symbol": "ETH-USDT",
+      "seq": 5,
+      "path": "data/historical/ETH-USDT/ETH-USDT_005_20251001_20260601.csv",
+      "start": "2025-10-01",
+      "end": "2026-06-01",
+      "bars": 23357,
+      "created_at": "2026-06-01T07:07:10+00:00"
+    }
+  ],
+  "models": [
+    {
+      "id": "ETH-USDT_001",
+      "symbol": "ETH-USDT",
+      "seq": 1,
+      "path": "models/hunter/hunter_eth.cbm",
+      "dataset_id": "",
+      "created_at": "2026-06-01T06:52:02+00:00",
+      "val_accuracy": null
+    },
+    {
+      "id": "ETH-USDT_002",
+      "symbol": "ETH-USDT",
+      "seq": 2,
+      "path": "models/hunter/hunter_eth_2.cbm",
+      "dataset_id": "",
+      "created_at": "2026-06-01T06:52:02+00:00",
+      "val_accuracy": null
+    },
+    {
+      "id": "ETH-USDT_003",
+      "symbol": "ETH-USDT",
+      "seq": 3,
+      "path": "models/hunter/hunter_eth_2022.cbm",
+      "dataset_id": "",
+      "created_at": "2026-06-01T06:52:02+00:00",
+      "val_accuracy": null
+    },
+    {
+      "id": "BTC-USDT_001",
+      "symbol": "BTC-USDT",
+      "seq": 1,
+      "path": "models/hunter/hunter_v1.cbm",
+      "dataset_id": "",
+      "created_at": "2026-06-01T06:52:02+00:00",
+      "val_accuracy": null
+    },
+    {
+      "id": "BTC-USDT_002",
+      "symbol": "BTC-USDT",
+      "seq": 2,
+      "path": "models/strategist/strategist_v1.cbm",
+      "dataset_id": "",
+      "created_at": "2026-06-01T06:52:02+00:00",
+      "val_accuracy": null
+    },
+    {
+      "id": "ETH-USDT_004",
+      "symbol": "ETH-USDT",
+      "seq": 4,
+      "path": "models/hunter/ETH-USDT/ETH-USDT_004.cbm",
+      "dataset_id": "ETH-USDT_005",
+      "created_at": "2026-06-01T07:08:51+00:00",
+      "val_accuracy": 0.8322319334896611
+    },
+    {
+      "id": "ETH-USDT_005",
+      "symbol": "ETH-USDT",
+      "seq": 5,
+      "path": "models/hunter/ETH-USDT/ETH-USDT_005.cbm",
+      "dataset_id": "ETH-USDT_005",
+      "created_at": "2026-06-13T13:52:15+00:00",
+      "val_accuracy": 0.8322319334896611
+    },
+    {
+      "id": "ETH-USDT_006",
+      "symbol": "ETH-USDT",
+      "seq": 6,
+      "path": "models/hunter/ETH-USDT/ETH-USDT_006.cbm",
+      "dataset_id": "ETH-USDT_005",
+      "created_at": "2026-06-13T13:58:49+00:00",
+      "val_accuracy": 0.8322319334896611
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+# Apex V5 Global Configuration (v4.0 – Spotter + CatBoost Hunter)
+# ----------------------------------------------------------------
+
+general:
+  timeframe: "15m"
+  symbols: ["ETH-USDT", "BTC-USDT"]
+  exchange: "BingX"
+  market_type: "futures"
+  log_level: "INFO"
+  environment: "production"   # 'production' или 'backtest'
+
+paths:
+  data_raw: "data/raw/"
+  data_processed: "data/processed/"
+  windows_h5: "data/processed/windows.h5"          # больше не используется, оставлено для совместимости
+  metadata_parquet: "data/processed/metadata.parquet"
+  logs:
+    hunter_log: "data/logs/eth_hunter_log.parquet"
+    strategist_log: "data/logs/eth_strategist_log.parquet"
+  models:
+    hunter_model: "models/hunter/hunter_eth.cbm"          # CatBoost
+    strategist_model: "models/strategist/strategist_v1.cbm"
+
+# --------------------------------
+# Агент Spotter (детектор выпуклостей на кривых)
+# --------------------------------
+spotter:
+  window: 50          # глубина окна анализа (баров)
+  order: 5            # порядок локальных экстремумов
+  max_lag: 2          # допустимый лаг между экстремумами на разных кривых (баров)
+
+# --------------------------------
+# Агент Hunter (CatBoost классификатор)
+# --------------------------------
+
+hunter:
+  max_lag: 10          # максимальное расстояние между меткой Spotter и касанием зоны (баров)
+  target_horizon: 50   # горизонт разметки целей (баров, до следующего разворота)
+  online_learning:
+    min_buffer_size: 2000
+    min_new_examples: 50        # снижено для CatBoost
+    max_days_since_update: 30
+    replay_sample_size: 500
+    validation_last_days: 7
+  model:
+    iterations: 200
+    learning_rate: 0.1
+    depth: 5
+
+# --------------------------------
+# Агент Strategist (пока не переработан, оставлены старые параметры)
+# --------------------------------
+strategist:
+  online_learning:
+    min_new_examples: 100
+    update_frequency_days: 1
+    epochs: 5
+  model:
+    loss_function: "Quantile:alpha=0.8"
+    iterations: 500
+    learning_rate: 0.03
+    depth: 6
+
+# --------------------------------
+# Агент Critic (статистические фильтры)
+# --------------------------------
+critic:
+  adx_threshold: 20
+  spread_multiplier: 1.5
+  liquidity_distance_threshold: 2.0     # в единицах ATR (пока не используется, но оставлен)
+  min_tick_multiplier: 0.0
+  blocked_hours:
+    - [0, 1]
+  avg_spread_window: 100
+
+# --------------------------------
+# Агент Dispatcher (риск-менеджмент)
+# --------------------------------
+dispatcher:
+  risk:
+    base_risk: 0.005
+    target_volatility: 0.20
+    max_leverage_normal: 3.0
+    max_leverage_paranoia: 1.5
+    atr_period: 50
+    sl_multiplier: 0.8
+  paranoia_mode:
+    use_high_water_mark: true
+    hwm_threshold: 0.95
+    adx_threshold_paranoia: 25
+  state_machine:
+    heartbeat_timeout_seconds: 5
+
+# --------------------------------
+# Бэктест
+# --------------------------------
+backtest:
+  slippage:
+    btc_eth: 0.0005
+    altcoins: 0.002
+  commission:
+    maker: 0.0004
+    taker: 0.0006
+  delay_bars: 1
+
+# --------------------------------
+# Хранилище (оставлено без изменений)
+# --------------------------------
+storage:
+  windows_hdf5:
+    dataset_name: "windows"
+    chunks: [1000, 20, 4]
+    compression: "gzip"
+  logs_parquet:
+    compression: "snappy"
